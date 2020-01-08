@@ -1,0 +1,68 @@
+<!-- Crear un documento HTML que contenga un elemento img con su respectiva imagen.
+Luego crear dos botones: el primero con texto “comenzar” y el segundo con texto
+“terminar”. La idea es que al hacer clic sobre el botón “comenzar” se ejecute
+una función de tiempo que cambie la imagen del elemento img cada 2 segundos.
+Y cuando se haga clic en el botón “terminar” se detenga el cambio de imagen.
+
+Nota: mostrar por los menos 4 imágenes. -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <style media="screen">
+      .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 15%;
+      }
+      .button{
+        padding: 15px;
+        margin: 15px;
+        font-size: 20px;
+        background: #21aedb;
+        border: 0;
+        cursor: pointer;
+        color: #fff;
+        font-weight: bold;
+      }
+      .contenedor{
+        width: 50%;
+      }
+    </style>
+    <title>Actividad 13</title>
+    <script type="text/javascript">
+      var indice = 0;                                                             // IDEA: variable entera
+      var funcionComenzar = null;
+      function cambiarImagen()
+      {
+          var listaImagenes = ['img1.png','img2.png','img3.png','img4.png','img5.png'];
+          if (indice <=4)
+          {
+              document.getElementById("miImagen").src = listaImagenes[indice];
+          }
+          else
+          {
+              indice = 0;
+              document.getElementById("miImagen").src = listaImagenes[indice];
+          }
+          indice += 1;
+
+          funcionComenzar = setTimeout(function(){    //Funcion reciproca o llamada a si missma
+            cambiarImagen(indice)
+          }, 90);
+      }
+
+      function pararImagen(){
+        clearInterval(funcionComenzar);
+      }
+    </script>
+  </head>
+  <body>
+    <img align="center" src="img1.png" id="miImagen" width="200px" height="200px" class="center" >
+    <div class="contenedor">
+      <button  type="button" onclick="cambiarImagen()" class="button" name="button">Comenzar</button>
+      <button  type="button" onclick="pararImagen()" class="button" name="button">Terminar</button>
+    </div>
+  </body>
+</html>
